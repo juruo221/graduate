@@ -70,7 +70,21 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-var a = 1;
+// var a=1;
+
+var app = new Vue({
+	el: "#app",
+	data: {
+		message: "Hello Vue"
+	}
+});
+// var React = require('react');
+// var ReactDo = require('react-dom');
+
+// ReactDOM.render(
+// 	<h1>Hello,world</h1>,
+// 	document.getElementById('example')
+// );
 
 /***/ }),
 /* 1 */

@@ -4,7 +4,7 @@
         <ul>
             <li v-for="n in 5">{{ n }}</li>
         </ul>
-        <div>ss</div>
+      
     </div>
 </template>
 
@@ -20,8 +20,8 @@ export default {
 
 <style >
 #example {
-    background:#000000;
-　　color:#fff;
+   /* background:#000000;
+　　color:#fff;*/
     height: 100vh;
 }
 </style>

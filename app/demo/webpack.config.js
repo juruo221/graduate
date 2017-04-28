@@ -4,8 +4,9 @@ var Webpack = require("webpack");
     	entry: ["./src/home/index.js"],
     	output: {
     		path: __dirname + '/static/js',
-        	filename: '[name].[hash].js',
-          chunkFilename: '[id].[chunkhash].js'
+        publicPath: '/demo/static/js',
+       filename: '[name].js',
+       chunkFilename: '[id].[chunkhash].js'
     	}, 
   	 	module: { 
         rules: [
@@ -42,5 +43,6 @@ var Webpack = require("webpack");
             filename: __dirname + '/views/home.html',
             inject: true
         })
-      ]
+      ],
+      watch: true
 	};

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/demo/static/js";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 12);
@@ -8979,7 +8979,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n#example {\r\n    background:#000000;\r\n　　color:#fff;\r\n    height: 100vh;\r\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n#example {\r\n   /* background:#000000;\r\n　　color:#fff;*/\r\n    height: 100vh;\r\n}\r\n", ""]);
 
 // exports
 
@@ -8988,7 +8988,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n#example {\
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = "\n<!-- <div id=\"example\">\n    <h1>{{ msg }}</h1>\n    <ul>\n        <li v-for=\"n in 5\">{{ n }}</li>\n    </ul>\n</div> -->\n<span>ss</span>\n";
+module.exports = "\n<div id=\"example\">\n    <h1>{{ msg }}</h1>\n    <ul>\n        <li v-for=\"n in 5\">{{ n }}</li>\n    </ul>\n  \n</div>\n";
 
 /***/ }),
 /* 9 */

@@ -32,7 +32,7 @@ var Webpack = require("webpack");
         // require时省略的扩展名，如：require('module') 不需要module.js 
        extensions: ['.js','.css', '.vue'],
        alias: {
-            'Vue': 'vue/dist/vue.esm.js'
+            'Vue': 'vue/dist/vue.js'
         }
     	},
       plugins: [

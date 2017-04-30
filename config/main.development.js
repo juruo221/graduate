@@ -32,6 +32,7 @@ module.exports = makeConfig({
   api: {
     github_api: 'https://api.github.com/',
     github: 'https://github.com/',
+    demo: 'http://127.0.0.1:3000/__MOCK__/demo/'
   },
 
   // mock server配置

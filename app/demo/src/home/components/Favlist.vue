@@ -1,11 +1,9 @@
 <template>
     <div id="isStart">
-        <!-- <div :class=" {login: isAct} " :style="{ backgroundImage: 'url('+bg+')' }">
-    		{{ date }}
-        </div> -->
-        <register v-if="_show(1)" ></register>
-        <log-in v-if="_show(2)" ></log-in>
-        <home-info v-if="_show(3)" ></home-info>
+        <log-in v-if=" _show( 1 ) " @on-result-change="change"></log-in>
+        <register v-if=" _show( 2 ) "></register>
+        <home-info v-if=" _show( 3 ) "></home-info>
+        <reg-succ v-if=" _show( 4 ) "></reg-succ>
     </div>
 </template>
 
@@ -13,24 +11,55 @@
 import Register from './register.vue'
 import LogIn from './logIn.vue'
 import HomeInfo from './homeInfo.vue'
+import RegSucc from './registerSuccess.vue'
 
 export default {
 	components: {
         Register,
         LogIn,
-        HomeInfo
+        HomeInfo,
+        RegSucc
   	},
-    data () {
+    data (){
         return {
-        	flag: 2
+        	flag: ''
         }
     },
-    mounted () {
+    created (){
+    	this.flagUpdate(this.$route.params.id);
+    }, 
+    mounted (){
     },
     methods : {
-    	_show (tag) {
+    	_show (tag){
     		if (this.flag == tag) return true;
     		else return false;
+    	},
+    	change (da){
+    		
+    	},
+    	flagUpdate (str){
+    		switch (str){
+    			case 'login':
+    				this.flag = 1;
+    				break;
+    			case 'register':
+    				this.flag = 2;
+    				break;
+    			case 'homeInfo':
+    				this.flag = 3;
+    				break;
+    			case 'registerSuccess':
+    				this.flag = 4;
+    				break;
+    			default:
+    				this.flag = 1;
+    		}
+    	}
+    },
+    watch: {
+    	'$route.params.id': function(newVal, oldVal){
+    		this.flagUpdate(newVal);
     	}
     }
 }

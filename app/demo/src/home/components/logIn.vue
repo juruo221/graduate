@@ -1,10 +1,13 @@
 <template>
 	<div class="login" :style="{backgroundImage: 'url(' + bg + ')'}">
 		<div class="content">
-			<input type="text" name="" class="userId" placeholder="用户名">
+			<input v-model="userId" type="text" name="userId" class="userId" placeholder="用户名">
 			<hr>
-			<input type="text" name="" class="userPwd" placeholder="密码">
+			<input v-model="userPwd" type="text" name="userPwd" class="userPwd" placeholder="密码">
 			<hr>
+			<div class="pwd-wrong-wrapper">
+				<span v-if="pwdWrong" class="pwd-wrong">密码错误或账号不存在</span>	
+			</div>
 			<input type="button" value="登陆" class="btn-login" @click="login()">
 			<input type="button" value="注册账号" class="btn-register" @click="register()">
 			<div class="btn-forget-pwd">忘记密码？</div>
@@ -14,23 +17,49 @@
 
 <script>
 export default {
+	props: {
+		// flag: {
+		// 	type: Number,
+		// 	twoWay: true
+		// }
+	},
     data () {
         return {
-        	bg: ''
+        	bg: '',
+        	userId: '',
+        	userPwd: '',
+        	pwdWrong: false
         }
     },
     mounted () {
+    	// this.$emit("on-result-change",'3');
     	$.get('/data/info/repo',res => {
-    		console.log(res);
     		if (res && res.code == 0){
     			this.bg = res.data && res.data.bg;
-    			console.log(this.bg);
     		}
     	})
     },
     methods : {
+    	login(){
+    		$.post('/dashboard/user/user/checkPwd', {
+    			id: this.userId,
+    			pwd: this.userPwd
+    		},res => {
+    			//有坑待开发
+    			if (res.length == 1){	
+    				// this.$route.params.id = 'homeInfo';
+    				// this.$router.push(this.$route.params.id);
+    				// this.$router.push(this.$route.params.page);
+    				this.$router.push({ path: '/v1/homeInfo/blog'})
+
+    			}else {
+    				this.pwdWrong = true;
+    			}
+    		});
+    	},
     	register(){
-    		
+    		this.$route.params.id = 'register';
+    		this.$router.push(this.$route.params.id);
     	}
     }
 
@@ -47,6 +76,15 @@ export default {
 	width: 60%;
 	height: 50%;
 	padding: 50% 20% 0;
+}
+.login .content .pwd-wrong-wrapper{
+	height: 40px;
+}
+.login .content .pwd-wrong-wrapper .pwd-wrong{
+	display: block;
+    font-size: 20px;
+    line-height: 40px;
+    color: red;
 }
 .login .content .userId{
 	width: 100%;

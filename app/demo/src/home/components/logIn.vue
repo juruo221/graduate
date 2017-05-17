@@ -41,25 +41,29 @@ export default {
     },
     methods : {
     	login(){
+    		console.log('click');
     		$.post('/dashboard/user/user/checkPwd', {
     			id: this.userId,
     			pwd: this.userPwd
     		},res => {
     			//有坑待开发
     			if (res.length == 1){	
+    				console.log('true');
     				// this.$route.params.id = 'homeInfo';
     				// this.$router.push(this.$route.params.id);
     				// this.$router.push(this.$route.params.page);
     				this.$router.push({ path: '/v1/homeInfo/blog'})
 
     			}else {
+    				console.log('false');
     				this.pwdWrong = true;
     			}
     		});
     	},
     	register(){
-    		this.$route.params.id = 'register';
-    		this.$router.push(this.$route.params.id);
+    		console.log('++++++++++++');
+    		// this.$route.params.id = 'register';
+    		this.$router.push({ path: '/v1/register' });
     	}
     }
 

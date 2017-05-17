@@ -8,7 +8,7 @@ const makeConfig = require('../src/utils').makeConfig;
 module.exports = makeConfig({
   // vhost配置
   vhost: {
-    '127.0.0.1': 'demo',
+    '192.168.191.1': 'demo',
     'localhost': 'blog',
     'feclub.cn': 'blog',
     'localhost/test': 'test',
@@ -32,7 +32,7 @@ module.exports = makeConfig({
   api: {
     github_api: 'https://api.github.com/',
     github: 'https://github.com/',
-    demo: 'http://127.0.0.1:3000/__MOCK__/demo/'
+    demo: 'http://192.168.191.1:3000/__MOCK__/demo/'
   },
 
   // mock server配置
@@ -51,7 +51,7 @@ module.exports = makeConfig({
   constant: {
     cdn: '',
     domain: {
-      demo: 'http://127.0.0.1:3000'
+      demo: 'http://192.168.191.1:3000'
     }
   },
 

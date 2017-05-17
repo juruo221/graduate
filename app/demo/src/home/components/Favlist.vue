@@ -40,16 +40,16 @@ export default {
     	},
     	flagUpdate (str){
     		switch (str){
-    			case 'login':
+    			case '/v1/login':
     				this.flag = 1;
     				break;
-    			case 'register':
+    			case '/v1/register':
     				this.flag = 2;
     				break;
-    			case 'homeInfo':
+    			case '/v1/homeInfo':
     				this.flag = 3;
     				break;
-    			case 'registerSuccess':
+    			case '/v1/registerSuccess':
     				this.flag = 4;
     				break;
     			default:
@@ -58,8 +58,10 @@ export default {
     	}
     },
     watch: {
-    	'$route.params.id': function(newVal, oldVal){
-    		this.flagUpdate(newVal);
+    	'$route': function(newVal, oldVal){
+            console.log(oldVal);
+            console.log(newVal);
+    		this.flagUpdate(newVal.path);
     	}
     }
 }
@@ -72,6 +74,8 @@ body,ul,div,input{
 }
 html,body,#app,#isStart{
 	height: 100%;
+    width: 100%;
+    max-width: 100%;
 }
 hr{
 	height: 0px;
@@ -95,4 +99,7 @@ color: #fff;
 input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
 color: #fff; 
 } 
+input:focus {
+        font-size: 20px !important;
+}
 </style>

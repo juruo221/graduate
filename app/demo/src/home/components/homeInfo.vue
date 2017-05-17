@@ -3,8 +3,8 @@
 		<div class="content">
 			<div class="tab" @click="fontColorChange()">
 				<span>动态</span>
-				<span>帖子</span>
 				<span>进吧</span>
+				<span>+</span>
 				<span>好友</span>
 				<span>我的</span>
 			</div>
@@ -15,6 +15,7 @@
 		
 		<!-- <note></note>
 		<about-me></about-me> -->		
+		<!-- <router-view></router-view> -->
 	</div>
 </template>
 
@@ -30,7 +31,7 @@ export default {
 	data() {
 		return {
 			oldTag: null,
-			flag: 1
+			flag: 0
 		}
 	},
 	created (){
@@ -42,8 +43,8 @@ export default {
 		this.flagUpdate(this.$route.params.page);
 	},
 	mounted() {
-		this.oldTag = $("span")[this.flag - 1];
-		$($("span")[this.flag - 1]).css("color", "red");
+		this.oldTag = $("span")[this.flag];
+		$($("span")[this.flag]).css("color", "red");
 	},
 	methods: {
 		_show(tag) {
@@ -58,41 +59,41 @@ export default {
 			var tag = event.target || event.srcElement;
 			$(tag).css("color","red");
 			this.oldTag = tag;
+			console.log(this.$route);
 			switch (tag.innerHTML){
 				case "动态":
-					this.flag = 1;
-					this.$route.params.page = 'blog';
-					this.$router.push(this.$route.params.page);
+					this.flag = 0;
+					this.$router.push({ path: "/v1/homeInfo/blog" });
 					break;
 				case "进吧":
-					this.flag = 2;
+					this.flag = 1;
 					this.$route.params.page = 'tribe';
-					this.$router.push(this.$route.params.page);
+					this.$router.push({ path: "/v1/homeInfo/tribe" });
 					break;
 				case "好友":
 					this.flag = 3;
 					this.$route.params.page = 'friend';
-					this.$router.push(this.$route.params.page);
+					this.$router.push({ path: "/v1/homeInfo/friend" });
 					break;
 				case "我的":
 					this.flag = 4;
-					this.$route.params.page = 'abouteMe';
-					this.$router.push(this.$route.params.page);
+					this.$route.params.page = 'aboutMe';
+					this.$router.push({ path: "/v1/homeInfo/aboutMe" });
 					break;
 				default:
-					this.flag = 1;
+					this.flag = 0;
 					this.$route.params.page = 'blog';
-					this.$router.push(this.$route.params.page);	
+					this.$router.push({ path: "/v1/homeInfo/blog" });
 			};
 			
 		},
 		flagUpdate (str){
     		switch (str){
     			case 'blog':
-    				this.flag = 1;
+    				this.flag = 0;
     				break;
     			case 'tribe':
-    				this.flag = 2;
+    				this.flag = 1;
     				break;
     			case 'friend':
     				this.flag = 3;
@@ -101,14 +102,17 @@ export default {
     				this.flag = 4;
     				break;
     			default:
-    				this.flag = 1;
+    				this.flag = 0;
     		}
     	}
 	},
 	watch: {
-    	// '$route.params.page': function(newVal, oldVal){
-    	// 	this.flagUpdate(newVal);
-    	// }
+    	'$route.params.page': function(newVal, oldVal){
+    		this.flagUpdate(newVal);
+    		$(this.oldTag).css("color","#000");
+    		$($("span")[this.flag]).css("color", "red");
+    		this.oldTag = $("span")[this.flag];
+    	}
     }
 }
 </script>

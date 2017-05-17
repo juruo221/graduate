@@ -23,6 +23,8 @@ app.use(Middles.static(['/static/**/*', '/*/static/**/*'], {
   maxage: config.site.env == 'production' && 60 * 60 * 1000
 }));
 
+// app.use(staticCache(path.join(__dirname, '../app/demo')));
+
 // 上传下载功能
 app.use(Middles.xload(app, config.xload));
 
@@ -90,5 +92,16 @@ let vhosts = Object.keys(config.vhost).map((item) => {
 
 // 注入vhosts路由
 app.use(Middles.vhost(vhosts));
+
+const server = require('http').Server(app.callback());
+const io = require('socket.io')(server);
+io.on('connection', function (socket) {
+  console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+
 
 module.exports = app;

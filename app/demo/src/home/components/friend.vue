@@ -5,11 +5,11 @@
 				<img src="/demo/static/image/userImg.jpg">
 				<span>新的好友</span>
 			</div>
-			<div class="check-friend">
+			<div class="check-friend" @click="addFriend()">
 				<img src="/demo/static/image/userImg.jpg">
 				<span>查找好友</span>
 			</div>
-			<div class="item-content">
+			<div class="item-content" @click="selectItem()">
 				<div class="item">
 					<img src="/demo/static/image/userImg.jpg">
 					<span>好友1</span>
@@ -88,9 +88,20 @@ export default {
 	created (){
 	},
 	mounted() {
-		console.log(this.$route.params.page);
 	},
-	methods: {	
+	methods: {
+		addFriend() {
+			this.$router.push('/v1/addFriend');
+		},
+		selectItem() {
+			let event = window.event || arguments[0];
+			let tag = event.target || event.srcElement;
+			console.log(tag.innerHTML);
+			this.$route.params.zz = 'zz'
+			this.$router.push('/v1/homeInfo/friend/zz');
+			console.log('++++++++++++++');
+			console.log(this.$route);
+		}
 	}
 }
 </script>
@@ -98,6 +109,7 @@ export default {
 <style>
 .friend{
 	width: 100%;
+	padding-bottom: 90px;
 	background-color: #fff;
 }
 .friend .content{
@@ -106,7 +118,6 @@ export default {
 }
 .friend .content .new-friend, .friend .content .check-friend{
 	height: 100px;
-	background-color: red;
 }
 .friend .content .new-friend img,.friend .content .check-friend img{
 	width: 100px;
